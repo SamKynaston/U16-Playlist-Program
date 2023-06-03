@@ -1,0 +1,50 @@
+From Song Import Song
+Import Random
+
+Class Playlist:
+  Init(self, title, filename):
+    self.Title = title
+    self.Filename = filename
+    self.Songs = []
+  
+  Function Load(self, filename)
+    self.Songs = []
+    
+    print("Opening Playlist")
+
+    File = open(filename, "r")
+    
+    For Song in File Do
+      Fields = Line.Split(";")
+      SongObj = Song(fields[0], fields[1], int(fields[2]))
+      self.Enqueue(Song)
+    EndFor
+
+  Function Save(self, removeWhenSaved):
+    print("Saving")
+    File = open(self.Filename, "w")
+
+    For Song in self.Songs Do
+      File.Write(Song.Title + ";" + Song.Artist + ";" + String(Song.Duration) + ";")
+      If removeWhenSaved Then
+        self.Remove(Song)
+      End
+    EndFor
+    File.Close()
+  EndFunction
+
+  Function Enqueue(self, Song):
+    self.Songs.Append(Song)
+  EndFunction
+
+  Function Remove(self, Song):
+    self.Songs.Remove(Song)
+  EndFunction
+
+  Function Shuffle(self, Song):
+    random.shuffle(self.Songs)
+  EndFunction
+
+  Function Reset(self, Song):
+    self.Songs = []
+  EndFunction

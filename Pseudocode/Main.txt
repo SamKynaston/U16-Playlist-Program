@@ -1,0 +1,80 @@
+Import OS
+
+From Playlist Import Playlist
+From Song Import Song
+
+ActivePlaylist = Playlist("Empty", "N/A")
+
+Function Menu():
+  OS.sys("cls")
+
+  print("""
+
+      Playlist
+    Current Songs:
+
+  """)
+  
+  print(ActivePlaylist.Songs)
+
+  print("""
+
+        Options
+      1. Add Song
+      2. Remove Song
+      3. Load Playlist
+      4. Save Playlist
+      5. Shuffle
+      6. Quit
+
+  """)
+
+  UserInput = String(Input("> "))
+
+  If UserInput == 1 Then
+    Title = ""
+    Artist = ""
+    Duration = 0
+
+    While True:
+      Title = String(Input("Title of Song: "))
+      If Length(Title) > 0:
+        break;
+
+    While True:
+      Artist = String(Input("Artist: "))
+      If Length(Artist) > 0:
+        break;
+
+    Try:
+      While True:
+        Duration = Integer(Input("Duration: "))
+        If Duration > 0:
+          break;
+    Except:
+      Print("Input a Number!")
+
+    NewSong = Song(Title, Artist)
+    
+  Elif UserInput == 2 Then
+    SongToRemove = String(Input("Song Name: "))
+    
+    For Song in ActivePlaylist.Songs Do
+      If Song.Title == SongToRemove Thehn
+        ActivePlaylist.Remove(Song)
+      End
+    EndFor 
+  Elif UserInput == 3 Then
+    FileDirectory = String(Input("File: "))
+    ActivePlaylist.Load(FileDirectory)
+  Elif UserInput == 4 Then
+    ActivePlaylist.Save()
+  Elif UserInput == 5 Then
+    ActivePlaylist.Shuffle()
+  Elif UserInput == 6 Then
+    return False
+EndFunction
+
+While True:
+  Menu()
+  break
